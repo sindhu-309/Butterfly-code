@@ -1,1 +1,1 @@
-From any signal (.wav) format, using this code extract the MFCC feature coefficients and find the minimum and maximum values.
+From any signal (.wav) format, using this code extract the MFCC feature coefficients and find the minimum and maximum values. Here in inferencing approximation strategies are adopted.
