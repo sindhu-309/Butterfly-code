@@ -1,0 +1,93 @@
+function out=APPADD1(a1,b1)
+% clc;
+% clear all;
+% close all;
+% a1=90.99175 - 100.2300010001i;
+% b1=-0.101000 + 12.00000993700000000000i;
+%%%%%%
+a1r=real(a1);
+a1r=a1r*2^15;
+if a1r<=0
+    signa1=1;a1r=abs(a1r);
+else
+    signa1=0;a1r=a1r;
+end
+x1r=round(a1r);
+x1r=fliplr(de2bi(x1r));N=length(x1r);
+a1r_o=scalenew(x1r);
+N1=length(a1r_o);
+Z=[a1r_o zeros(1,(N-N1))];
+a1r=bi2de(fliplr(Z));
+if signa1==1
+    a1r=a1r*-1;
+else
+    a1r=a1r;
+end
+a1r=a1r*2^-15;
+%%%%%%%%
+a1i=imag(a1);
+a1i=a1i*2^15;
+if a1i<=0
+    signa2=1;a1i=abs(a1i);
+else
+    signa2=0;a1i=a1i;
+end
+x1i=round(a1i);
+x1i=fliplr(de2bi(x1i));N=length(x1i);
+a1i_o=scalenew(x1i);
+N1=length(a1i_o);
+Z=[a1i_o zeros(1,(N-N1))];
+a1i=bi2de(fliplr(Z));
+if signa2==1
+    a1i=a1i*-1;
+else
+    a1i=a1i;
+end
+a1i=a1i*2^-15;
+%%%%%%%%%%
+b1r=real(b1);
+b1r=b1r*2^15;
+if b1r<=0
+    signa3=1;b1r=abs(b1r);
+else
+    signa3=0;b1r=b1r;
+end
+x1r=round(b1r);
+x1r=fliplr(de2bi(x1r));N=length(x1r);
+b1r_o=scalenew(x1r);
+N1=length(b1r_o);
+Z=[b1r_o zeros(1,(N-N1))];
+b1r=bi2de(fliplr(Z));
+if signa3==1
+    b1r=b1r*-1;
+else
+    b1r=b1r;
+end
+b1r=b1r*2^-15;
+%%%%%%%%
+b1i=imag(b1);
+b1i=b1i*2^15;
+if b1i<=0
+    signa4=1;b1i=abs(b1i);
+else
+    signa4=0;b1i=b1i;
+end
+x1i=round(b1i);
+x1i=fliplr(de2bi(x1i));N=length(x1i);
+b1i_o=scalenew(x1i);
+N1=length(b1i_o);
+Z=[b1i_o zeros(1,(N-N1))];
+b1i=bi2de(fliplr(Z));
+if signa4==1
+    b1i=b1i*-1;
+else
+    b1i=b1i;
+end
+b1i=b1i*2^-15;
+%%%%%%%%%%
+c=(a1r+b1r)+1i*(a1i+b1i);
+cr=real(c);
+ci=imag(c);
+%             cr(abs(cr)<0.00001)=0;
+%             ci(abs(ci)<0.00001)=0;
+            out=cr+1i*ci;
