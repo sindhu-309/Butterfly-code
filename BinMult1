@@ -1,0 +1,39 @@
+function out=BinMult1(a,b)
+% clc;
+% clear all;
+%  
+% a=[1 1 1 1];
+% b=[0 1 0 1];
+%     clear
+%     a = true;
+%     b = logical([1 0 0]);
+    lenA = length(a);
+    lenB = length(b);
+    lenAll = lenA+lenB;
+    
+    % Special cases
+    if ~nnz(a) || ~nnz(b) % In case any of input is 0
+        out = false; return
+    elseif lenA==1, out=b; return % In case any of input is 1
+    elseif lenB==1, out=a; return 
+    end
+    
+    % Shifting and adding
+    aEx = [zeros(1,lenB) a]; % binary a extended to the combined digit count
+    idx = find(fliplr(b)); % find non-zero flipped binary b
+    carry = zeros(1,lenAll);
+    for i=1:length(idx)
+        carry = carry + circshift(aEx,1-idx(i)); % shift binary a to non-zero binary b only
+    end
+    
+    % Summarize final carry into binary
+    y = zeros(1,lenAll);
+    for i=lenAll:-1:2
+        f = carry(i) + y(i);
+        y(i) = mod(f,2);
+        y(i-1) = floor(f/2);
+    end
+    y(1) = y(1) + carry(1);
+    
+    if ~y(1) && length(y)>1, y(1) = []; end % Remove leading zero
+    out = logical(y);
